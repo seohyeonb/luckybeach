@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1280
     height: 709.3334
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 7}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 71
+  controlID: 46
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 72
+  controlID: 47
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -620,7 +620,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -630,19 +630,21 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 85
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts
   m_LastFoldersGridSize: 85
-  m_LastProjectPath: "C:\\Users\\seohyeon\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uC720\uB2C8\uD2F0\\1231\\luckybeach-ebefed788be7f3c69d56b9580d65ab76d9d6d97e"
+  m_LastProjectPath: "C:\\Users\\seohyeon\\OneDrive\\\uBB38\uC11C\\GitHub\\luckybeach"
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 48924
+    - m_Data: 48958
     m_LastClickedID:
-      m_Data: 48924
-    m_ExpandedIDs: []
+      m_Data: 48958
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 48964
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -673,7 +675,9 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 48964
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -701,8 +705,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 48932
-    m_LastClickedInstanceID: 48932
+    - m_Data: -3862
+    m_LastClickedInstanceID: -3862
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -830,8 +834,8 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -2852
-      - m_Data: -1314
+      - m_Data: -2512
+      - m_Data: -1424
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1354,7 +1358,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 0, y: 5.5, z: 0}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0}
   m_RenderMode: 0
