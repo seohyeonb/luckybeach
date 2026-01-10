@@ -5,16 +5,18 @@ TagManager:
   serializedVersion: 3
   tags:
   - cat_orange
+  - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
-  - 
-  - 
+  - PlayerBody
+  - PlayerHitbox
+  - Wall
   - 
   - 
   - 
