@@ -1,40 +1,32 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager I;
 
-    public int maxHits = 3;
-    public int hitCount = 0;
-    private bool isGameOver = false;
+    public int score = 0;
+    public Text scoreText;
 
     private void Awake()
     {
-        if (I != null) { Destroy(gameObject); return; }
-        I = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void AddHit()
-    {
-        if (isGameOver) return;
-
-        hitCount++;
-        Debug.Log($"Hit: {hitCount}/{maxHits}");
-
-        if (hitCount >= maxHits)
+        if (I == null)
         {
-            isGameOver = true;
-            SceneManager.LoadScene("GameOverScene");
+            I = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    public void Restart()
+    public void AddScore(int value)
     {
-        Time.timeScale = 1f;
-        hitCount = 0;
-        isGameOver = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        score += value;
+
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
     }
 }

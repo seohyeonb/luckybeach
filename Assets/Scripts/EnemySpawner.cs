@@ -1,36 +1,40 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] enemies;
-    [SerializeField] private float spawnInterval = 0.2f;
+    [SerializeField]
+    private GameObject[] enemyPrefabs; // ← 배열 이름 복수형 권장
 
-    [SerializeField] private float minX = -2.2f; // 왼쪽 한계
-    [SerializeField] private float maxX = 2.2f; // 오른쪽 한계
-    [SerializeField] private int spawnCount = 5; // 한 번에 몇 개
+    public float spawnY = 6f;
+    public float minX = -2.3f;
+    public float maxX = 2.3f;
 
-    IEnumerator Start()
+    private void Start()
     {
-        for (int i = 0; i < spawnCount; i++)
+        StartCoroutine(SpawnRoutine());
+    }
+
+    IEnumerator SpawnRoutine()
+    {
+        while (true)
         {
-            int enemyIndex = Random.Range(0, enemies.Length);
-            float randomX = Random.Range(minX, maxX);
+            // 1초, 2초, 3초 중 랜덤
+            float delay = Random.Range(1, 4);
+            yield return new WaitForSeconds(delay);
 
-            SpawnEnemy(randomX, enemyIndex);
-
-            yield return new WaitForSeconds(spawnInterval);
+            SpawnEnemy();
         }
     }
 
-    void SpawnEnemy(float posX, int index)
+    void SpawnEnemy()
     {
-        Vector3 spawnPos = new Vector3(
-            posX,
-            8f,     // 화면 위
-            -1f
-        );
+        // 🔥 핵심: 배열에서 하나 랜덤 선택
+        int index = Random.Range(0, enemyPrefabs.Length);
 
-        Instantiate(enemies[index], spawnPos, Quaternion.identity);
+        float randomX = Random.Range(minX, maxX);
+        Vector2 spawnPos = new Vector2(randomX, spawnY);
+
+        Instantiate(enemyPrefabs[index], spawnPos, Quaternion.identity);
     }
 }

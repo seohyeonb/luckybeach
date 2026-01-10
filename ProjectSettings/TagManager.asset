@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - cat_orange
+  - Enemy
+  - Coin
   layers:
   - Default
   - TransparentFX
