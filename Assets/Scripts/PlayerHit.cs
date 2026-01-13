@@ -3,57 +3,71 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
-    public float invincibleTime = 0.8f;
-    public float blinkInterval = 0.1f;
+    [SerializeField] float invincibleTime = 1.0f;
+    [SerializeField] float blinkInterval = 0.08f;
+    [SerializeField] float startGraceTime = 0.15f; // ⭐ 시작 직후 오작동 방지
 
-    private bool invincible = false;
-    private SpriteRenderer sr;
-    private Color originalColor;
+    bool invincible = false;
+    Collider2D hitbox;
+    SpriteRenderer sr;
+    Color originColor;
+    bool canBeHit = false;
 
-    private void Awake()
+    void Awake()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
-        Debug.Log("[PlayerHit] Awake. SpriteRenderer = " + (sr ? sr.name : "NULL"));
-
-        if (sr != null) originalColor = sr.color;
+        hitbox = GetComponent<Collider2D>();          // Hitbox(Trigger)
+        sr = GetComponentInParent<SpriteRenderer>();  // 플레이어 본체 스프라이트
+        originColor = sr.color;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    IEnumerator Start()
     {
-        Debug.Log("[PlayerHit] Trigger with: " + other.name + " tag=" + other.tag);
+        // 시작하자마자 겹쳐있는 애들 때문에 Enter가 떠버리는 경우가 있음
+        hitbox.enabled = false;
+        yield return new WaitForSeconds(startGraceTime);
+        hitbox.enabled = true;
+        canBeHit = true;
+    }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!canBeHit) return;
         if (invincible) return;
 
-        // 태그가 정확히 cat_orange 맞는지 확인용으로 태그 체크 잠깐 완화
-        if (other.CompareTag("cat_orange"))
+        // ⭐ Enemy = 장애물 = 하트 깎는 대상
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("[PlayerHit] CAT HIT -> BLINK!");
-            StartCoroutine(RedBlinkInvincible());
+            GameManager.I.AddHit();;  // 하트 감소
+            StartCoroutine(InvincibleRoutine()); // 빨간 깜빡 + 무적
         }
     }
 
-    private IEnumerator RedBlinkInvincible()
+    IEnumerator InvincibleRoutine()
     {
         invincible = true;
+        hitbox.enabled = false; // 무적 동안 추가 피격 방지
 
         float t = 0f;
-        bool isRed = false;
+        bool redOn = false;
 
         while (t < invincibleTime)
         {
-            t += blinkInterval;
-            isRed = !isRed;
+            redOn = !redOn;
 
-            if (sr != null)
+            var c = originColor;
+            if (redOn)
             {
-                // 눈에 확 띄게 마젠타로 테스트 (레드가 티 안 나면 이게 확실함)
-                sr.color = isRed ? Color.magenta : originalColor;
+                // 빨강으로 깜빡 (원래 알파 유지)
+                c.r = 1f; c.g = 0f; c.b = 0f;
             }
+            sr.color = c;
 
             yield return new WaitForSeconds(blinkInterval);
+            t += blinkInterval;
         }
 
-        if (sr != null) sr.color = originalColor;
+        sr.color = originColor;
+        hitbox.enabled = true;
         invincible = false;
     }
 }

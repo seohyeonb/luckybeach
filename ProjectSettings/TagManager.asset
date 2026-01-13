@@ -7,16 +7,17 @@ TagManager:
   - cat_orange
   - Enemy
   - Coin
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
-  - 
-  - 
+  - PlayerBody
+  - PlayerHitbox
+  - Wall
   - 
   - 
   - 
