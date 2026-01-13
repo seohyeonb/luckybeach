@@ -2,27 +2,37 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public float moveSpeed = 3f;
     public int scoreValue = 1;
+    public float moveSpeed = 3f;
+    public float spawnY = 8f;
+
 
     void Update()
     {
-        // 아래로 계속 이동
         transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
 
-        // 화면 아래로 벗어나면 삭제
         if (transform.position.y < -6f)
-        {
             Destroy(gameObject);
-        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        // Player랑 부딪혔을 때만
+        if (!other.CompareTag("Player")) return;
+
+        // GameManager 안전 체크
+        if (GameManager.I == null)
         {
-            GameManager.I.AddScore(scoreValue);
-            Destroy(gameObject);
+            Debug.LogError("❌ GameManager.I is NULL");
+            return;
         }
+        GameManager.I.AddCoin(1);
+
+        // 점수 +1
+        GameManager.I.AddScore(scoreValue);
+
+        // 코인 제거
+        Destroy(gameObject);
     }
 }

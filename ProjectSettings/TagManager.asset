@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Coin
   - Wall
+  - Speed
   layers:
   - Default
   - TransparentFX
